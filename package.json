@@ -1,0 +1,29 @@
+{
+  "name": "lecture-react-season2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "class": "npm start --workspace class-based",
+    "hook": "npm start --workspace hook-based"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=16.20.0",
+    "nvm": ">=8.19.4"
+  },
+  "engineStrict": true,
+  "workspaces": [
+    "class-based",
+    "hook-based",
+    "shared"
+  ],
+  "msw": {
+    "workerDirectory": "shared/public"
+  },
+  "dependencies": {
+    "classnames": "^2.3.2"
+  }
+}
