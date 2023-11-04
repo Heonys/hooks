@@ -3,6 +3,8 @@ import OrderPage from "./pages/OrderPage";
 import ProductPage from "./pages/ProductPage";
 import { Router, Routes, Route } from "./lib/MyRouter";
 import { Layout } from "./lib/MyLayout";
+import { useEffect, useState } from "react";
+import MyReact from "./lib/MyReact";
 
 const App = () => {
   return (
