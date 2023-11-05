@@ -1,30 +1,27 @@
-import React, { Children, useContext, useEffect, useMemo, useState } from "react";
+import React, { useState, createContext, Children, useEffect, useContext } from "react";
 
-const routerContext = React.createContext();
+const routerContext = createContext();
 routerContext.displayName = "RouterContext";
 
 export const Router = ({ children }) => {
   const [path, setPath] = useState(window.location.pathname);
 
-  useEffect(() => {
-    window.addEventListener("popstate", handlePopState);
-    window.history.replaceState({ path }, "");
-    return () => {
-      window.removeEventListener("popstate", handlePopState);
-    };
-  }, []);
-
-  function changePath(path) {
-    setPath(path);
-    window.history.pushState({ path }, "", path);
-  }
-
-  function handlePopState(event) {
-    const nextPath = event.state && event.state.path;
-    console.log("nextPath ::", event.state);
+  const hanldePopstate = (e) => {
+    const nextPath = e.state && e.state.path;
     if (!nextPath) return;
     setPath(nextPath);
-  }
+  };
+
+  useEffect(() => {
+    window.addEventListener("popstate", hanldePopstate);
+    window.history.replaceState({ path }, "", "/");
+    return () => window.removeEventListener("popstate", hanldePopstate);
+  });
+
+  const changePath = (path) => {
+    setPath(path);
+    window.history.pushState({ path }, "", path);
+  };
 
   return <routerContext.Provider value={{ path, changePath }}>{children}</routerContext.Provider>;
 };
